@@ -6443,6 +6443,15 @@ function switchSeason(s,btn){
   var fwNav=document.getElementById('nav-sportswear-fw');
   if(fwNav) fwNav.style.display=s==='fw'?'':'none';
 }
+function switchImg(btn){
+  var wrap=btn.closest('.card-img-wrap');
+  if(!wrap) return;
+  var imgs=wrap.querySelectorAll('img');
+  var btns=wrap.querySelectorAll('.img-tabs button');
+  var idx=Array.from(btns).indexOf(btn);
+  imgs.forEach(function(img,i){img.classList.toggle('active',i===idx)});
+  btns.forEach(function(b,i){b.classList.toggle('active',i===idx)});
+}
 </script>
 
 <!-- EmailJS SDK -->
