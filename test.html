@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Image Test</title></head>
+<body style="background:#222;color:#fff;padding:20px;font-family:sans-serif">
+<h2>Image Loading Test</h2>
+<p>Test 1 - Streetwear (image1000.jpg):</p>
+<img src="images/image1000.jpg" style="max-width:300px;border:2px solid #0f0" onerror="this.style.border='2px solid red';this.alt='FAILED';document.getElementById('s1').textContent='❌ FAILED';document.getElementById('s1').style.color='red'" onload="document.getElementById('s1').textContent='✅ OK';document.getElementById('s1').style.color='lime'">
+<span id="s1">loading...</span>
+<br><br>
+<p>Test 2 - Sportswear (s3c3.jpg):</p>
+<img src="images/s3c3.jpg" style="max-width:300px;border:2px solid #0f0" onerror="this.style.border='2px solid red';this.alt='FAILED';document.getElementById('s2').textContent='❌ FAILED';document.getElementById('s2').style.color='red'" onload="document.getElementById('s2').textContent='✅ OK';document.getElementById('s2').style.color='lime'">
+<span id="s2">loading...</span>
+<br><br>
+<p>Test 3 - Direct URL test:</p>
+<img src="https://quickshowtech.github.io/tachlation-catalogue/images/s3c3.jpg" style="max-width:300px;border:2px solid #0f0" onerror="this.style.border='2px solid red';document.getElementById('s3').textContent='❌ FAILED';document.getElementById('s3').style.color='red'" onload="document.getElementById('s3').textContent='✅ OK';document.getElementById('s3').style.color='lime'">
+<span id="s3">loading...</span>
+</body>
+</html>
