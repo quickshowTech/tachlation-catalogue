@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QUICK SHOW — Melbourne Expo Catalogue</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0a0a;--surface:#141414;--surface2:#1c1c1c;--border:#2a2a2a;
+  --text:#f0f0f0;--text2:#a0a0a0;--accent:#3b82f6;--accent2:#60a5fa;
+  --green:#22c55e;--orange:#f59e0b;--red:#ef4444;
+  --radius:16px;--radius-sm:10px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.5;-webkit-font-smoothing:antialiased}
+
+/* HEADER */
+.hero{
+  position:relative;overflow:hidden;
+  padding:60px 24px 50px;text-align:center;
+  background:linear-gradient(135deg,#0a0a2e 0%,#1a1a4a 30%,#0a2a4a 60%,#0a0a2e 100%);
+}
+.hero::before{
+  content:'';position:absolute;top:0;left:0;right:0;bottom:0;
+  background:radial-gradient(ellipse at 30% 20%,rgba(59,130,246,0.15),transparent 60%),
+             radial-gradient(ellipse at 70% 80%,rgba(96,165,250,0.1),transparent 50%);
+}
+.hero *{position:relative;z-index:1}
+.hero-logo{
+  width:80px;height:80px;margin:0 auto 20px;
+  background:#fff;border-radius:20px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;font-weight:800;color:#0a0a2e;letter-spacing:1px;
+  box-shadow:0 8px 32px rgba(59,130,246,0.3);
+}
+.hero h1{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:clamp(28px,5vw,52px);font-weight:800;
+  letter-spacing:-1px;margin-bottom:8px;
+  background:linear-gradient(135deg,#fff 0%,#60a5fa 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.hero .subtitle{font-size:clamp(14px,2.5vw,20px);color:#8ab4f8;font-weight:400;margin-bottom:24px}
+.hero .stats{
+  display:flex;gap:32px;justify-content:center;flex-wrap:wrap;
+}
+.hero .stat{text-align:center}
+.hero .stat-num{font-family:'Space Grotesk',sans-serif;font-size:32px;font-weight:700;color:#fff}
+.hero .stat-label{font-size:12px;color:#8ab4f8;text-transform:uppercase;letter-spacing:2px;margin-top:2px}
+
+/* NAV */
+.nav-wrap{
+  position:sticky;top:0;z-index:100;
+  background:rgba(10,10,10,0.85);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+.nav-inner{
+  max-width:1400px;margin:0 auto;padding:0 16px;
+  display:flex;align-items:center;gap:0;
+  overflow-x:auto;scrollbar-width:none;
+}
+.nav-inner::-webkit-scrollbar{display:none}
+.nav-btn{
+  flex-shrink:0;padding:14px 20px;
+  font-size:13px;font-weight:500;color:var(--text2);
+  background:none;border:none;cursor:pointer;
+  border-bottom:2px solid transparent;
+  transition:all .2s;white-space:nowrap;
+}
+.nav-btn:hover,.nav-btn.active{color:#fff;border-bottom-color:var(--accent)}
+.nav-btn .count{
+  display:inline-block;margin-left:6px;padding:1px 7px;
+  background:var(--surface2);border-radius:10px;
+  font-size:11px;color:var(--text2);
+}
+.nav-btn.active .count{background:var(--accent);color:#fff}
+
+/* SEARCH */
+.search-wrap{
+  max-width:1400px;margin:0 auto;padding:20px 16px 0;
+}
+.search-box{
+  display:flex;align-items:center;gap:10px;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:12px 20px;
+  transition:border-color .2s;
+}
+.search-box:focus-within{border-color:var(--accent)}
+.search-box svg{flex-shrink:0;color:var(--text2)}
+.search-box input{
+  flex:1;background:none;border:none;outline:none;
+  font-size:15px;color:var(--text);font-family:inherit;
+}
+.search-box input::placeholder{color:#555}
+
+/* GRID */
+.section{max-width:1400px;margin:0 auto;padding:32px 16px 0}
+.section-title{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:22px;font-weight:700;margin-bottom:20px;
+  display:flex;align-items:center;gap:10px;
+}
+.section-title .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+  gap:20px;
+}
+
+/* CARD */
+.card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);overflow:hidden;
+  transition:transform .25s,box-shadow .25s,border-color .25s;
+}
+.card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 12px 40px rgba(0,0,0,0.4);
+  border-color:#3a3a3a;
+}
+.card-img{
+  position:relative;width:100%;aspect-ratio:3/4;
+  background:var(--surface2);overflow:hidden;
+}
+.card-img img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform .4s;
+}
+.card:hover .card-img img{transform:scale(1.03)}
+.card-img .tech-badge{
+  position:absolute;top:12px;right:12px;
+  padding:4px 10px;border-radius:6px;
+  background:rgba(0,0,0,0.7);backdrop-filter:blur(8px);
+  font-size:11px;font-weight:700;color:#fff;
+  letter-spacing:1px;text-transform:uppercase;
+  border:1px solid rgba(255,255,255,0.15);
+}
+.card-img .price-tag{
+  position:absolute;bottom:12px;left:12px;
+  padding:6px 12px;border-radius:var(--radius-sm);
+  background:rgba(0,0,0,0.75);backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,0.1);
+}
+.card-img .price-tag .p1{font-size:18px;font-weight:700;color:#fff}
+.card-img .price-tag .p2{font-size:11px;color:var(--text2)}
+
+.card-body{padding:16px 18px 18px}
+.card-body .style-no{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:12px;font-weight:600;color:var(--accent2);
+  letter-spacing:1px;margin-bottom:4px;
+}
+.card-body .card-name{
+  font-size:15px;font-weight:600;line-height:1.3;
+  margin-bottom:10px;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+}
+.card-body .badges{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.badge{
+  padding:3px 10px;border-radius:6px;
+  font-size:11px;font-weight:500;
+  background:var(--surface2);color:var(--text2);
+  border:1px solid var(--border);
+}
+.badge.fabric{color:#8ab4f8;border-color:rgba(96,165,250,0.2)}
+.badge.weight{color:var(--green);border-color:rgba(34,197,94,0.2)}
+
+.card-body .features{margin-bottom:12px}
+.card-body .features .feat-row{
+  display:flex;gap:16px;margin-bottom:4px;
+}
+.feat-col{flex:1}
+.feat-col .feat-label{font-size:10px;font-weight:600;color:var(--accent2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px}
+.feat-col .feat-item{font-size:11px;color:var(--text2);line-height:1.4}
+
+.card-bottom{
+  display:flex;align-items:center;justify-content:space-between;
+  padding-top:12px;border-top:1px solid var(--border);
+}
+.color-dots{display:flex;gap:5px}
+.color-dot{
+  width:16px;height:16px;border-radius:50%;
+  border:2px solid var(--border);
+  transition:transform .15s;
+}
+.color-dot:hover{transform:scale(1.2)}
+.price-info{text-align:right}
+.price-info .moq{font-size:10px;color:var(--text2)}
+.price-info .price{font-size:15px;font-weight:700;color:var(--green)}
+
+/* LIGHTBOX */
+.lightbox{
+  display:none;position:fixed;top:0;left:0;right:0;bottom:0;
+  z-index:9999;background:rgba(0,0,0,0.92);
+  align-items:center;justify-content:center;
+  cursor:pointer;
+}
+.lightbox.show{display:flex}
+.lightbox img{max-width:90vw;max-height:90vh;border-radius:var(--radius);object-fit:contain}
+.lightbox .close-btn{
+  position:absolute;top:20px;right:20px;
+  width:40px;height:40px;border-radius:50%;
+  background:rgba(255,255,255,0.1);border:none;
+  color:#fff;font-size:20px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+}
+
+/* FOOTER */
+.footer{
+  margin-top:60px;padding:40px 24px;
+  text-align:center;border-top:1px solid var(--border);
+  color:var(--text2);font-size:13px;
+}
+.footer a{color:var(--accent2);text-decoration:none}
+.footer .brand{font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;color:#fff;margin-bottom:8px}
+
+/* NO RESULTS */
+.no-results{
+  display:none;text-align:center;padding:60px 20px;
+  color:var(--text2);font-size:16px;
+}
+.no-results.show{display:block}
+
+/* RESPONSIVE */
+@media(max-width:640px){
+  .hero{padding:40px 16px 36px}
+  .hero .stats{gap:20px}
+  .hero .stat-num{font-size:24px}
+  .grid{grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+  .card-body{padding:14px 14px 16px}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-logo">QUICK<br>SHOW</div>
+  <h1>Melbourne Expo Catalogue</h1>
+  <p class="subtitle">Global Streetwear Supply Chain — 2026 Collection</p>
+  <div class="stats">
+    <div class="stat"><div class="stat-num" id="total-count">20</div><div class="stat-label">Products</div></div>
+    <div class="stat"><div class="stat-num">3</div><div class="stat-label">Categories</div></div>
+    <div class="stat"><div class="stat-num">7+</div><div class="stat-label">Tech Fabrics</div></div>
+  </div>
+</div>
+
+<!-- NAV -->
+<div class="nav-wrap">
+  <div class="nav-inner" id="nav">
+    <button class="nav-btn active" data-cat="all">All <span class="count" id="cnt-all">20</span></button>
+    <button class="nav-btn" data-cat="T-shirts">T-Shirts <span class="count" id="cnt-tshirts">0</span></button>
+    <button class="nav-btn" data-cat="Hoodie/Sweatshirt">Hoodies <span class="count" id="cnt-hoodies">0</span></button>
+    <button class="nav-btn" data-cat="Jackets">Jackets <span class="count" id="cnt-jackets">0</span></button>
+    <button class="nav-btn" data-cat="Long Sleeve T-shirts">Long Sleeves <span class="count" id="cnt-ls">0</span></button>
+  </div>
+</div>
+
+<!-- SEARCH -->
+<div class="search-wrap">
+  <div class="search-box">
+    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="6"/><path d="M13 13l4 4"/></svg>
+    <input type="text" id="search" placeholder="Search by style number, name, fabric, or feature…">
+  </div>
+</div>
+
+<!-- PRODUCTS -->
+<div class="section">
+  <div class="grid" id="product-grid"></div>
+  <div class="no-results" id="no-results">No matching products found.</div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="close-btn" onclick="closeLightbox()">✕</button>
+  <img id="lb-img" src="" alt="">
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="brand">QUICK SHOW®</div>
+  <p>Global Streetwear Supply Chain</p>
+  <p style="margin-top:12px">
+    🏪 <a href="https://inflation.en.alibaba.com/" target="_blank">Streetwear Store</a> &nbsp;·&nbsp;
+    🏃 <a href="https://cninflationoem.en.alibaba.com/" target="_blank">Sportswear Store</a> &nbsp;·&nbsp;
+    📖 <a href="https://quickshowtech.github.io/tachlation-catalogue/" target="_blank">Full Catalogue</a>
+  </p>
+  <p style="margin-top:16px;font-size:11px;color:#555">© 2026 Guangzhou Jiezhan Trading Co., Ltd. All rights reserved.</p>
+</div>
+
+<script>
+const PRODUCTS = [
+  {
+    style_no:"3539W26",name:"Color Block Climbing & Bouldering Long-Sleeve Tee",
+    category:"Long Sleeve T-shirts",
+    composition:"91% Polyester 9% Spandex",grams:"160G",
+    craft:["Vibrant color-block, breathable stretch","Functional style for outdoor & daily wear"],
+    performance:["Abrasion-resistant quick-dry polyester","Lightweight breathable & wrinkle-resistant"],
+    price_1000:"US$8.93",price_300:"US$9.88",
+    colors:["#1a6b3a","#3a7aba"],tech_badge:""
+  },
+  {
+    style_no:"4508W25",name:"Thermolite® Air Fleece Hoodie",
+    category:"Hoodie/Sweatshirt",
+    composition:"100% Polyester",grams:"170G",
+    craft:["Thermolite® brand endorsement","Slim fit + back panel splice"],
+    performance:["Thermolite® tech warmth fiber","Lightweight thermal / Non-bulky"],
+    price_1000:"US$11.54",price_300:"US$12.77",
+    colors:["#f5f0e0","#c4a67a","#8a8a7a","#3a3a3a","#1a1a1a"],tech_badge:"THERMOLITE"
+  },
+  {
+    style_no:"4606W26",name:"Polar Fleece Hoodie Pullover",
+    category:"Hoodie/Sweatshirt",
+    composition:"89% Polyester, 11% Spandex",grams:"220G",
+    craft:["Polar fleece hood design, warm & stylish","Classic hoodie pullover fit"],
+    performance:["Polar fleece — lightweight warmth","Polyester + spandex stretch combo"],
+    price_1000:"US$11.26",price_300:"US$12.46",
+    colors:["#f5f5f5","#5a6a7a","#3a4a3a","#1a1a1a"],tech_badge:""
+  },
+  {
+    style_no:"4610W26",name:"3D-Cut Dual-Zip Pullover Hoodie",
+    category:"Hoodie/Sweatshirt",
+    composition:"100% Polyester",grams:"220G",
+    craft:["3D-cut + dual-zip design","Dual-zip easy on/off"],
+    performance:["100% polyester","3D-cut / Ergonomic fit"],
+    price_1000:"US$17.53",price_300:"US$19.14",
+    colors:["#e8e8e8","#1a1a1a"],tech_badge:""
+  },
+  {
+    style_no:"4615W26",name:"Lyocell Temp-Regulating Chainstitch Print Hoodie",
+    category:"Hoodie/Sweatshirt",
+    composition:"63.5% Cotton, 16% Lyocell, 15.5% Polyester, 5% Spandex",grams:"380G",
+    craft:["Hasselblad stitch + white ink transfer","Classic hoodie fit"],
+    performance:["Lyocell temp-regulating thermal fabric","Soft cotton feel / Warm without bulk"],
+    price_1000:"US$20.00",price_300:"US$22.14",
+    colors:["#1a1a1a","#d4a040"],tech_badge:"LYCRA"
+  },
+  {
+    style_no:"4626W26",name:"Polartec® Micro Fleece Hoodie",
+    category:"Hoodie/Sweatshirt",
+    composition:"100% Polyester",grams:"160G",
+    craft:["Polartec® outdoor fabric endorsement","Stand collar hood, snug cold protection"],
+    performance:["Polartec® micro fleece technology","Ultra-light 160G / Thermal warmth"],
+    price_1000:"US$28.88",price_300:"US$31.98",
+    colors:["#1a1a1a","#6a1a1a"],tech_badge:"POLARTEC"
+  },
+  {
+    style_no:"4628W26",name:"Polartec® Micro Fleece Light Warm Stand Collar Hoodie",
+    category:"Hoodie/Sweatshirt",
+    composition:"100% Polyester",grams:"160G",
+    craft:["Polartec® outdoor fabric endorsement","Stand collar pullover, easy on/off"],
+    performance:["Polartec® micro fleece technology","Ultra-light 160G / Thermal warmth"],
+    price_1000:"US$27.55",price_300:"US$30.50",
+    colors:["#1a1a1a","#f0f0f0","#5a5a5a"],tech_badge:"POLARTEC"
+  },
+  {
+    style_no:"5653W26",name:"Waffle Breathable Sport Jacket",
+    category:"Jackets",
+    composition:"100% Polyester",grams:"200G",
+    craft:["Waffle texture + dual-puller zip","Deep hood, windproof & sunproof"],
+    performance:["Waffle texture quick-dry fabric","Lightweight micro-stretch"],
+    price_1000:"US$13.47",price_300:"US$14.91",
+    colors:["#b8b898","#f5f5f5","#1a1a1a"],tech_badge:""
+  },
+  {
+    style_no:"5685W26",name:"Waffle Bonded Stand Collar Jacket",
+    category:"Jackets",
+    composition:"100% Polyester",grams:"200G",
+    craft:["Waffle texture + bonding craft","Stand collar windproof & warm"],
+    performance:["Waffle 3D textured fabric","Built-in breathable perforation"],
+    price_1000:"US$14.65",price_300:"US$16.22",
+    colors:["#f0f0f0","#c8c8c8","#8a8a8a","#3a3a3a","#1a1a1a"],tech_badge:""
+  },
+  {
+    style_no:"8351S26",name:"Snowflake Climbing Print Short Sleeve Tee",
+    category:"T-shirts",
+    composition:"73% Polyester, 10% Cotton, 10% Modal, 7% Spandex",grams:"220G",
+    craft:["Rubber print + color puff print","Rock climbing outdoor trendy style"],
+    performance:["Polyester-cotton-modal blend","Multi-fiber synergy — soft + stretch"],
+    price_1000:"US$8.63",price_300:"US$9.56",
+    colors:["#1a1a1a","#f0d0d0"],tech_badge:""
+  },
+  {
+    style_no:"8358S26",name:"230G Totem Contrast Stitch Print Short Sleeve",
+    category:"T-shirts",
+    composition:"100% Polyester",grams:"230G",
+    craft:["Halftone screen + rubber + contrast stitch","Totem print high recognition"],
+    performance:["Cotton-feel stretch fabric","Comfortable breathable"],
+    price_1000:"US$8.61",price_300:"US$9.53",
+    colors:["#1a3a6a","#1a1a1a"],tech_badge:""
+  },
+  {
+    style_no:"8360S26",name:"Glow-In-Dark Contrast Panel Short Sleeve Tee",
+    category:"T-shirts",
+    composition:"67.1% Cotton, 32.9% Polyester",grams:"260G",
+    craft:["Glow-in-dark + rubber print + contrast panel","Day-night dual visual effect"],
+    performance:["Cotton-polyester blend 260G fabric","Crisp & structured / Shape retention"],
+    price_1000:"US$8.04",price_300:"US$8.90",
+    colors:["#f5f5f5","#1a1a1a"],tech_badge:""
+  },
+  {
+    style_no:"8363S26",name:"Modal Contrast Sport Short Sleeve",
+    category:"T-shirts",
+    composition:"47% Lyocell Tencel Modal + 47.5% Combed Cotton + 5.5% Spandex",grams:"230G",
+    craft:["Contrast sport aesthetics","Drop-shoulder loose fit"],
+    performance:["Lyocell Tencel Modal — silky skin-friendly","Stretch fit without constriction"],
+    price_1000:"US$8.64",price_300:"US$9.56",
+    colors:["#f5f5f5","#c4a060","#d4c4a0","#1a1a1a"],tech_badge:"TENCEL"
+  },
+  {
+    style_no:"8367S26",name:"Anti-Bacterial Sport Breathable Tee",
+    category:"T-shirts",
+    composition:"50% Polyester, 50% Sorona®",grams:"160G",
+    craft:["Glue print craft","Anti-bacterial treatment"],
+    performance:["UPF50+ sun protection","Sorona® fabric — built-in cool feel"],
+    price_1000:"US$6.44",price_300:"US$7.13",
+    colors:["#f5f5f5","#d4b080","#c0c0c0","#1a1a1a"],tech_badge:"SORONA"
+  },
+  {
+    style_no:"8373S26",name:"Perforated Quick-Dry Sport Tee",
+    category:"T-shirts",
+    composition:"100% Polyester",grams:"155G",
+    craft:["Glue print + perforated craft","Loose sport fit, comfortable not tight"],
+    performance:["Moisture-wicking quick-dry","Perforated structure accelerates airflow"],
+    price_1000:"US$5.79",price_300:"US$6.41",
+    colors:["#d4c4a0","#8a9a6a","#5a5a5a","#2a2a2a"],tech_badge:""
+  },
+  {
+    style_no:"8382S26",name:"Distressed Cotton Reflective Sport Tee",
+    category:"T-shirts",
+    composition:"100% Cotton",grams:"155G",
+    craft:["Silver reflective print + distressed cut","Distressed design adds street attitude"],
+    performance:["100% cotton / Soft & skin-friendly","Built-in linen-cotton texture"],
+    price_1000:"US$7.82",price_300:"US$8.66",
+    colors:["#2a2a2a","#5a6a4a"],tech_badge:""
+  },
+  {
+    style_no:"8387S26",name:"Micro-Grid Breathable Quick-Dry Contrast Sport Tee",
+    category:"T-shirts",
+    composition:"88% Polyester, 12% Spandex",grams:"125G",
+    craft:["Grid breathable weave + Rubber Print","Micro-grid texture"],
+    performance:["Polyester + spandex stretch fabric","Fine breathable micro-grid structure"],
+    price_1000:"US$6.84",price_300:"US$7.58",
+    colors:["#8a1a2a","#d4b080","#3a3a3a","#f5f5f5","#5a6a4a"],tech_badge:""
+  },
+  {
+    style_no:"8405S26",name:"Punched Hole Sport Quick-Dry Tee",
+    category:"T-shirts",
+    composition:"80% Nylon, 20% Spandex",grams:"160G",
+    craft:["Perforated print + mesh panels","Back perforation adds breathability"],
+    performance:["Nylon + spandex high-stretch combo","Mesh panels — targeted cooling"],
+    price_1000:"US$7.50",price_300:"US$8.31",
+    colors:["#f5f5f5","#1a1a1a"],tech_badge:""
+  },
+  {
+    style_no:"8411S26",name:"UPF50+ Pro Sun Protection Cool Feel Contrast Sport Tee",
+    category:"T-shirts",
+    composition:"50% Polyester, 50% Sorona®",grams:"160G",
+    craft:["Flock glue print, premium touch","Contrast design strong sporty feel"],
+    performance:["UPF50+ professional sun protection","Cool-on-contact — instant cooling"],
+    price_1000:"US$5.86",price_300:"US$6.48",
+    colors:["#6a7aaa","#1a3a6a","#8a2a2a","#1a1a1a"],tech_badge:"SORONA"
+  },
+  {
+    style_no:"8438S26",name:"Water-Reactive Print Sport Tee",
+    category:"T-shirts",
+    composition:"100% Polyester",grams:"150G",
+    craft:["Water-reactive print","Pattern appears when wet"],
+    performance:["Ultra-light breathable knit fabric","Soft hand feel / Ultra-low weight"],
+    price_1000:"US$6.99",price_300:"US$7.74",
+    colors:["#a0a0a0","#c4a060"],tech_badge:""
+  }
+];
+
+// Gradient backgrounds for cards without images
+const GRADIENTS = [
+  "linear-gradient(135deg,#1a2a4a,#2a3a5a)","linear-gradient(135deg,#2a1a3a,#3a2a4a)",
+  "linear-gradient(135deg,#1a3a2a,#2a4a3a)","linear-gradient(135deg,#3a2a1a,#4a3a2a)",
+  "linear-gradient(135deg,#2a2a3a,#3a3a4a)","linear-gradient(135deg,#1a2a2a,#2a3a3a)"
+];
+
+function renderCards(products){
+  const grid = document.getElementById('product-grid');
+  const noRes = document.getElementById('no-results');
+  if(!products.length){grid.innerHTML='';noRes.classList.add('show');return;}
+  noRes.classList.remove('show');
+  grid.innerHTML = products.map((p,i)=>{
+    const grad = GRADIENTS[i % GRADIENTS.length];
+    const colorDots = p.colors.map(c=>`<div class="color-dot" style="background:${c}"></div>`).join('');
+    const tb = p.tech_badge ? `<div class="tech-badge">${p.tech_badge}</div>` : '';
+    return `
+    <div class="card" data-style="${p.style_no}" data-category="${p.category}">
+      <div class="card-img" style="background:${grad}">
+        ${tb}
+        <div class="price-tag">
+          <div class="p1">${p.price_1000}</div>
+          <div class="p2">/1000pcs</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="style-no">${p.style_no}</div>
+        <div class="card-name">${p.name}</div>
+        <div class="badges">
+          <span class="badge fabric">${p.composition.length>35?p.composition.substring(0,35)+'…':p.composition}</span>
+          <span class="badge weight">${p.grams}</span>
+        </div>
+        <div class="features">
+          <div class="feat-row">
+            <div class="feat-col">
+              <div class="feat-label">Craft & Highlights</div>
+              ${p.craft.map(c=>`<div class="feat-item">• ${c}</div>`).join('')}
+            </div>
+            <div class="feat-col">
+              <div class="feat-label">Fabric Performance</div>
+              ${p.performance.map(c=>`<div class="feat-item">• ${c}</div>`).join('')}
+            </div>
+          </div>
+        </div>
+        <div class="card-bottom">
+          <div class="color-dots">${colorDots}</div>
+          <div class="price-info">
+            <div class="moq">≥300pcs</div>
+            <div class="price">${p.price_300}</div>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// Count categories
+function updateCounts(products){
+  const cats = {};
+  products.forEach(p=>{
+    cats[p.category] = (cats[p.category]||0)+1;
+  });
+  document.getElementById('cnt-all').textContent = products.length;
+  document.getElementById('cnt-tshirts').textContent = cats['T-shirts']||0;
+  document.getElementById('cnt-hoodies').textContent = cats['Hoodie/Sweatshirt']||0;
+  document.getElementById('cnt-jackets').textContent = cats['Jackets']||0;
+  document.getElementById('cnt-ls').textContent = cats['Long Sleeve T-shirts']||0;
+  document.getElementById('total-count').textContent = PRODUCTS.length;
+}
+
+// Filter
+let currentCat = 'all';
+let searchTerm = '';
+
+function filterProducts(){
+  let filtered = PRODUCTS;
+  if(currentCat !== 'all') filtered = filtered.filter(p=>p.category===currentCat);
+  if(searchTerm){
+    const q = searchTerm.toLowerCase();
+    filtered = filtered.filter(p=>
+      p.style_no.toLowerCase().includes(q) ||
+      p.name.toLowerCase().includes(q) ||
+      p.composition.toLowerCase().includes(q) ||
+      p.craft.join(' ').toLowerCase().includes(q) ||
+      p.performance.join(' ').toLowerCase().includes(q) ||
+      (p.tech_badge||'').toLowerCase().includes(q)
+    );
+  }
+  renderCards(filtered);
+}
+
+// Nav clicks
+document.querySelectorAll('.nav-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    currentCat = btn.dataset.cat;
+    filterProducts();
+  });
+});
+
+// Search
+document.getElementById('search').addEventListener('input',e=>{
+  searchTerm = e.target.value.trim();
+  filterProducts();
+});
+
+// Lightbox
+function openLightbox(src){
+  document.getElementById('lb-img').src=src;
+  document.getElementById('lightbox').classList.add('show');
+}
+function closeLightbox(){
+  document.getElementById('lightbox').classList.remove('show');
+}
+
+// Init
+updateCounts(PRODUCTS);
+renderCards(PRODUCTS);
+</script>
+</body>
+</html>
