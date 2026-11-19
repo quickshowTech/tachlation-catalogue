@@ -4,224 +4,63 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>QUICK SHOW — Melbourne Expo Catalogue 2026</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{
-  --bg:#0a0a0a;--surface:#141414;--surface2:#1c1c1c;--border:#2a2a2a;
-  --text:#f0f0f0;--text2:#a0a0a0;--accent:#3b82f6;--accent2:#60a5fa;
-  --green:#22c55e;--orange:#f59e0b;--red:#ef4444;
-  --radius:16px;--radius-sm:10px;
-}
-html{scroll-behavior:smooth}
-body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.5;-webkit-font-smoothing:antialiased}
-.hero{position:relative;overflow:hidden;padding:60px 24px 50px;text-align:center;background:linear-gradient(135deg,#0a0a2e 0%,#1a1a4a 30%,#0a2a4a 60%,#0a0a2e 100%)}
-.hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at 30% 20%,rgba(59,130,246,0.15),transparent 60%),radial-gradient(ellipse at 70% 80%,rgba(96,165,250,0.1),transparent 50%)}
-.hero *{position:relative;z-index:1}
-.hero-logo{width:80px;height:80px;margin:0 auto 20px;background:#fff;border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#0a0a2e;letter-spacing:1px;box-shadow:0 8px 32px rgba(59,130,246,0.3)}
-.hero h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(28px,5vw,52px);font-weight:800;letter-spacing:-1px;margin-bottom:8px;background:linear-gradient(135deg,#fff 0%,#60a5fa 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.hero .subtitle{font-size:clamp(14px,2.5vw,20px);color:#8ab4f8;font-weight:400;margin-bottom:24px}
-.hero .stats{display:flex;gap:32px;justify-content:center;flex-wrap:wrap}
-.hero .stat{text-align:center}
-.hero .stat-num{font-family:'Space Grotesk',sans-serif;font-size:32px;font-weight:700;color:#fff}
-.hero .stat-label{font-size:12px;color:#8ab4f8;text-transform:uppercase;letter-spacing:2px;margin-top:2px}
-.nav-wrap{position:sticky;top:0;z-index:100;background:rgba(10,10,10,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
-.nav-inner{max-width:1400px;margin:0 auto;padding:0 16px;display:flex;align-items:center;gap:0;overflow-x:auto;scrollbar-width:none}
-.nav-inner::-webkit-scrollbar{display:none}
-.nav-btn{flex-shrink:0;padding:14px 18px;font-size:13px;font-weight:500;color:var(--text2);background:none;border:none;cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap}
-.nav-btn:hover,.nav-btn.active{color:#fff;border-bottom-color:var(--accent)}
-.nav-btn .count{display:inline-block;margin-left:5px;padding:1px 7px;background:var(--surface2);border-radius:10px;font-size:11px;color:var(--text2)}
-.nav-btn.active .count{background:var(--accent);color:#fff}
-.search-wrap{max-width:1400px;margin:0 auto;padding:20px 16px 0}
-.search-box{display:flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:12px 20px;transition:border-color .2s}
-.search-box:focus-within{border-color:var(--accent)}
-.search-box svg{flex-shrink:0;color:var(--text2)}
-.search-box input{flex:1;background:none;border:none;outline:none;font-size:15px;color:var(--text);font-family:inherit}
-.search-box input::placeholder{color:#555}
-.section{max-width:1400px;margin:0 auto;padding:32px 16px 0}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:transform .25s,box-shadow .25s,border-color .25s}
-.card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,0.4);border-color:#3a3a3a}
-.card-img{position:relative;width:100%;aspect-ratio:3/4;background:var(--surface2);overflow:hidden}
-.card-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
-.card:hover .card-img img{transform:scale(1.03)}
-.card-img .tech-badge{position:absolute;top:12px;right:12px;padding:4px 10px;border-radius:6px;background:rgba(0,0,0,0.7);backdrop-filter:blur(8px);font-size:11px;font-weight:700;color:#fff;letter-spacing:1px;text-transform:uppercase;border:1px solid rgba(255,255,255,0.15)}
-.card-img .gender-badge{position:absolute;top:12px;left:12px;padding:4px 10px;border-radius:6px;background:rgba(236,72,153,0.8);backdrop-filter:blur(8px);font-size:11px;font-weight:600;color:#fff;letter-spacing:.5px}
-.card-img .price-tag{position:absolute;bottom:12px;left:12px;padding:6px 12px;border-radius:var(--radius-sm);background:rgba(0,0,0,0.75);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.1)}
-.card-img .price-tag .p1{font-size:18px;font-weight:700;color:#fff}
-.card-img .price-tag .p2{font-size:11px;color:var(--text2)}
-.card-body{padding:16px 18px 18px}
-.card-body .style-no{font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;color:var(--accent2);letter-spacing:1px;margin-bottom:4px}
-.card-body .card-name{font-size:15px;font-weight:600;line-height:1.3;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.card-body .badges{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
-.badge{padding:3px 10px;border-radius:6px;font-size:11px;font-weight:500;background:var(--surface2);color:var(--text2);border:1px solid var(--border)}
-.badge.fabric{color:#8ab4f8;border-color:rgba(96,165,250,0.2)}
-.badge.weight{color:var(--green);border-color:rgba(34,197,94,0.2)}
-.card-body .features{margin-bottom:12px}
-.card-body .features .feat-row{display:flex;gap:16px;margin-bottom:4px}
-.feat-col{flex:1}
-.feat-col .feat-label{font-size:10px;font-weight:600;color:var(--accent2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px}
-.feat-col .feat-item{font-size:11px;color:var(--text2);line-height:1.4}
-.card-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:12px;border-top:1px solid var(--border)}
-.color-dots{display:flex;gap:5px;flex-wrap:wrap}
-.color-dot{width:16px;height:16px;border-radius:50%;border:2px solid var(--border);transition:transform .15s}
-.color-dot:hover{transform:scale(1.2)}
-.price-info{text-align:right}
-.price-info .moq{font-size:10px;color:var(--text2)}
-.price-info .price{font-size:15px;font-weight:700;color:var(--green)}
-.no-results{display:none;text-align:center;padding:60px 20px;color:var(--text2);font-size:16px}
-.no-results.show{display:block}
-.footer{margin-top:60px;padding:40px 24px;text-align:center;border-top:1px solid var(--border);color:var(--text2);font-size:13px}
-.footer a{color:var(--accent2);text-decoration:none}
-.footer .brand{font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;color:#fff;margin-bottom:8px}
-@media(max-width:640px){
-  .hero{padding:40px 16px 36px}.hero .stats{gap:20px}.hero .stat-num{font-size:24px}
-  .grid{grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
-  .card-body{padding:14px 14px 16px}
+body{background:#1a1a1a;font-family:system-ui,sans-serif;color:#fff;display:flex;flex-direction:column;height:100vh;overflow:hidden}
+.header{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:#111;border-bottom:1px solid #333;flex-shrink:0}
+.header .brand{display:flex;align-items:center;gap:12px}
+.header .logo{width:36px;height:36px;background:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center}
+.header .logo svg{width:24px;height:24px}
+.header h1{font-size:16px;font-weight:700;letter-spacing:.5px}
+.header .sub{font-size:12px;color:#888;margin-top:1px}
+.header .actions{display:flex;gap:8px}
+.header .btn{padding:8px 16px;border-radius:8px;border:1px solid #444;background:#222;color:#fff;font-size:13px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:background .2s}
+.header .btn:hover{background:#333}
+.header .btn.primary{background:#3b82f6;border-color:#3b82f6}
+.header .btn.primary:hover{background:#2563eb}
+.pdf-container{flex:1;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.pdf-container iframe,.pdf-container embed,.pdf-container object{width:100%;height:100%;border:none}
+/* Fallback for mobile / browsers that don't embed PDF */
+.fallback{display:none;text-align:center;padding:40px 20px}
+.fallback p{margin-bottom:20px;color:#aaa;font-size:15px}
+.fallback .dl-btn{display:inline-block;padding:14px 32px;background:#3b82f6;color:#fff;border-radius:10px;text-decoration:none;font-weight:600;font-size:16px}
+.fallback .dl-btn:hover{background:#2563eb}
+@media(max-width:768px){
+  .pdf-container iframe,.pdf-container embed,.pdf-container object{display:none}
+  .fallback{display:block}
 }
 </style>
 </head>
 <body>
-<div class="hero">
-  <div class="hero-logo">QUICK<br>SHOW</div>
-  <h1>Melbourne Expo Catalogue</h1>
-  <p class="subtitle">Global Streetwear Supply Chain — 2026 Collection</p>
-  <div class="stats">
-    <div class="stat"><div class="stat-num" id="total-count">40</div><div class="stat-label">Products</div></div>
-    <div class="stat"><div class="stat-num">7</div><div class="stat-label">Categories</div></div>
-    <div class="stat"><div class="stat-num">10+</div><div class="stat-label">Tech Fabrics</div></div>
+<div class="header">
+  <div class="brand">
+    <div class="logo">
+      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="30" cy="30" r="12" fill="#1a1a2e"/>
+        <circle cx="70" cy="30" r="12" fill="#1a1a2e"/>
+        <circle cx="30" cy="70" r="12" fill="#1a1a2e"/>
+        <circle cx="70" cy="70" r="12" fill="#1a1a2e"/>
+        <rect x="25" y="42" width="10" height="16" rx="5" fill="#1a1a2e"/>
+        <rect x="65" y="42" width="10" height="16" rx="5" fill="#1a1a2e"/>
+        <rect x="42" y="25" width="16" height="10" rx="5" fill="#1a1a2e"/>
+        <rect x="42" y="65" width="16" height="10" rx="5" fill="#1a1a2e"/>
+      </svg>
+    </div>
+    <div>
+      <h1>QUICK SHOW®</h1>
+      <div class="sub">Melbourne Expo Catalogue 2026</div>
+    </div>
+  </div>
+  <div class="actions">
+    <a href="catalogue.pdf" download class="btn primary">⬇ Download PDF</a>
   </div>
 </div>
-<div class="nav-wrap">
-  <div class="nav-inner" id="nav">
-    <button class="nav-btn active" data-cat="all">All <span class="count" id="cnt-all">40</span></button>
-    <button class="nav-btn" data-cat="T-shirts">T-Shirts <span class="count" id="cnt-tshirts">0</span></button>
-    <button class="nav-btn" data-cat="Hoodie/Sweatshirt">Hoodies <span class="count" id="cnt-hoodies">0</span></button>
-    <button class="nav-btn" data-cat="Jackets">Jackets <span class="count" id="cnt-jackets">0</span></button>
-    <button class="nav-btn" data-cat="Pants">Pants <span class="count" id="cnt-pants">0</span></button>
-    <button class="nav-btn" data-cat="Shorts">Shorts <span class="count" id="cnt-shorts">0</span></button>
-    <button class="nav-btn" data-cat="Long Sleeve">Long Sleeves <span class="count" id="cnt-ls">0</span></button>
-    <button class="nav-btn" data-cat="Women">Women's <span class="count" id="cnt-women">0</span></button>
+<div class="pdf-container">
+  <iframe src="catalogue.pdf" type="application/pdf"></iframe>
+  <div class="fallback">
+    <p>PDF 预览在移动端可能不可用，请点击下方按钮下载查看</p>
+    <a href="catalogue.pdf" download class="dl-btn">⬇ 下载 PDF</a>
   </div>
 </div>
-<div class="search-wrap">
-  <div class="search-box">
-    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="6"/><path d="M13 13l4 4"/></svg>
-    <input type="text" id="search" placeholder="Search by style number, name, fabric, or feature…">
-  </div>
-</div>
-<div class="section">
-  <div class="grid" id="product-grid"></div>
-  <div class="no-results" id="no-results">No matching products found.</div>
-</div>
-<div class="footer">
-  <div class="brand">QUICK SHOW®</div>
-  <p>Global Streetwear Supply Chain</p>
-  <p style="margin-top:12px">
-    🏪 <a href="https://inflation.en.alibaba.com/" target="_blank">Streetwear Store</a> &nbsp;·&nbsp;
-    🏃 <a href="https://cninflationoem.en.alibaba.com/" target="_blank">Sportswear Store</a> &nbsp;·&nbsp;
-    📖 <a href="https://quickshowtech.github.io/tachlation-catalogue/" target="_blank">Full Catalogue</a>
-  </p>
-  <p style="margin-top:16px;font-size:11px;color:#555">© 2026 Guangzhou Jiezhan Trading Co., Ltd. All rights reserved.</p>
-</div>
-<script>
-const P=[
-{s:"3539W26",n:"Color Block Climbing & Bouldering Long-Sleeve Tee",cat:"Long Sleeve",comp:"91% Polyester 9% Spandex",g:"160G",cr:["Vibrant color-block, breathable stretch","Functional for outdoor & daily wear"],pf:["Abrasion-resistant quick-dry polyester","Lightweight breathable & wrinkle-resistant"],p1:"US$8.93",p2:"US$9.88",cl:["#1a6b3a","#6aafea"],tb:"",w:0},
-{s:"4508W25",n:"Thermolite® Air Fleece Hoodie",cat:"Hoodie/Sweatshirt",comp:"100% Polyester",g:"170G",cr:["Thermolite® brand endorsement","Slim fit + back panel splice"],pf:["Thermolite® tech warmth fiber","Lightweight thermal / Non-bulky"],p1:"US$11.54",p2:"US$12.77",cl:["#f5f0e0","#c4a67a","#8a8a7a","#3a3a3a","#1a1a1a"],tb:"THERMOLITE",w:0},
-{s:"4606W26",n:"Polar Fleece Hoodie Pullover",cat:"Hoodie/Sweatshirt",comp:"89% Polyester, 11% Spandex",g:"220G",cr:["Polar fleece hood design, warm & stylish","Classic hoodie pullover fit"],pf:["Polar fleece — lightweight warmth","Polyester + spandex stretch combo"],p1:"US$11.26",p2:"US$12.46",cl:["#f5f5f5","#5a6a7a","#3a4a3a","#1a1a1a"],tb:"",w:0},
-{s:"4610W26",n:"3D-Cut Dual-Zip Pullover Hoodie",cat:"Hoodie/Sweatshirt",comp:"100% Polyester",g:"220G",cr:["3D-cut + dual-zip design","Dual-zip easy on/off"],pf:["100% polyester","3D-cut / Ergonomic fit"],p1:"US$17.53",p2:"US$19.14",cl:["#e8e8e8","#1a1a1a"],tb:"",w:0},
-{s:"4615W26",n:"Lyocell Temp-Regulating Chainstitch Print Hoodie",cat:"Hoodie/Sweatshirt",comp:"63.5% Cotton, 16% Lyocell, 15.5% Polyester, 5% Spandex",g:"380G",cr:["Hasselblad stitch + white ink transfer","Classic hoodie fit"],pf:["Lyocell temp-regulating thermal","Soft cotton feel / Warm without bulk"],p1:"US$20.00",p2:"US$22.14",cl:["#1a1a1a","#d4a040"],tb:"LYCRA",w:0},
-{s:"4626W26",n:"Polartec® Micro Fleece Hoodie",cat:"Hoodie/Sweatshirt",comp:"100% Polyester",g:"160G",cr:["Polartec® outdoor fabric endorsement","Stand collar hood, snug cold protection"],pf:["Polartec® micro fleece technology","Ultra-light 160G / Thermal warmth"],p1:"US$28.88",p2:"US$31.98",cl:["#1a1a1a","#6a1a1a"],tb:"POLARTEC",w:0},
-{s:"4628W26",n:"Polartec® Micro Fleece Light Warm Stand Collar Hoodie",cat:"Hoodie/Sweatshirt",comp:"100% Polyester",g:"160G",cr:["Polartec® outdoor fabric endorsement","Stand collar pullover, easy on/off"],pf:["Polartec® micro fleece technology","Ultra-light 160G / Thermal warmth"],p1:"US$27.55",p2:"US$30.50",cl:["#1a1a1a","#f0f0f0","#5a5a5a"],tb:"POLARTEC",w:0},
-{s:"5653W26",n:"Waffle Breathable Sport Jacket",cat:"Jackets",comp:"100% Polyester",g:"200G",cr:["Waffle texture + dual-puller zip","Deep hood, windproof & sunproof"],pf:["Waffle texture quick-dry fabric","Lightweight micro-stretch"],p1:"US$13.47",p2:"US$14.91",cl:["#b8b898","#f5f5f5","#1a1a1a"],tb:"",w:0},
-{s:"5685W26",n:"Waffle Bonded Stand Collar Jacket",cat:"Jackets",comp:"100% Polyester",g:"200G",cr:["Waffle texture + bonding craft","Stand collar windproof & warm"],pf:["Waffle 3D textured fabric","Built-in breathable perforation"],p1:"US$14.65",p2:"US$16.22",cl:["#f0f0f0","#c8c8c8","#8a8a8a","#3a3a3a","#1a1a1a"],tb:"",w:0},
-{s:"5689W26",n:"Mamba Thermal Cotton Hoodie Zip Jacket",cat:"Jackets",comp:"40% Cotton, 55% Polyester, 5% Spandex",g:"320G",cr:["Thermal cotton lining locks heat","Hoodie zip jacket fit"],pf:["Cotton-polyester-spandex 320G fabric","Thermal cotton lining / Heat-lock warmth"],p1:"US$14.64",p2:"US$16.21",cl:["#e8e8e8","#b8b898","#5a5a3a","#3a3a3a","#1a3a6a"],tb:"",w:0},
-{s:"8351S26",n:"Snowflake Climbing Print Short Sleeve Tee",cat:"T-shirts",comp:"73% Polyester, 10% Cotton, 10% Modal, 7% Spandex",g:"220G",cr:["Rubber print + color puff print","Rock climbing outdoor trendy style"],pf:["Polyester-cotton-modal blend","Multi-fiber synergy — soft + stretch"],p1:"US$8.63",p2:"US$9.56",cl:["#1a1a1a","#f0d0d0"],tb:"",w:0},
-{s:"8358S26",n:"230G Totem Contrast Stitch Print Short Sleeve",cat:"T-shirts",comp:"100% Polyester",g:"230G",cr:["Halftone screen + rubber + contrast stitch","Totem print high recognition"],pf:["Cotton-feel stretch fabric","Comfortable breathable"],p1:"US$8.61",p2:"US$9.53",cl:["#1a3a6a","#1a1a1a"],tb:"",w:0},
-{s:"8360S26",n:"Glow-In-Dark Contrast Panel Short Sleeve Tee",cat:"T-shirts",comp:"67.1% Cotton, 32.9% Polyester",g:"260G",cr:["Glow-in-dark + rubber print + contrast panel","Day-night dual visual effect"],pf:["Cotton-polyester blend 260G fabric","Crisp & structured / Shape retention"],p1:"US$8.04",p2:"US$8.90",cl:["#f5f5f5","#1a1a1a"],tb:"",w:0},
-{s:"8363S26",n:"Modal Contrast Sport Short Sleeve",cat:"T-shirts",comp:"47% Lyocell Tencel Modal, 47.5% Combed Cotton, 5.5% Spandex",g:"230G",cr:["Contrast sport aesthetics","Drop-shoulder loose fit"],pf:["Lyocell Tencel Modal — silky skin-friendly","Stretch fit without constriction"],p1:"US$8.64",p2:"US$9.56",cl:["#f5f5f5","#c4a060","#d4c4a0","#1a1a1a"],tb:"TENCEL",w:0},
-{s:"8367S26",n:"Anti-Bacterial Sport Breathable Tee",cat:"T-shirts",comp:"50% Polyester, 50% Sorona®",g:"160G",cr:["Glue print craft","Anti-bacterial treatment"],pf:["UPF50+ sun protection","Sorona® fabric — built-in cool feel"],p1:"US$6.44",p2:"US$7.13",cl:["#f5f5f5","#d4b080","#c0c0c0","#1a1a1a"],tb:"SORONA",w:0},
-{s:"8373S26",n:"Perforated Quick-Dry Sport Tee",cat:"T-shirts",comp:"100% Polyester",g:"155G",cr:["Glue print + perforated craft","Loose sport fit, comfortable not tight"],pf:["Moisture-wicking quick-dry","Perforated structure accelerates airflow"],p1:"US$5.79",p2:"US$6.41",cl:["#d4c4a0","#8a9a6a","#5a5a5a","#2a2a2a"],tb:"",w:0},
-{s:"8382S26",n:"Distressed Cotton Reflective Sport Tee",cat:"T-shirts",comp:"100% Cotton",g:"155G",cr:["Silver reflective print + distressed cut","Distressed design adds street attitude"],pf:["100% cotton / Soft & skin-friendly","Built-in linen-cotton texture"],p1:"US$7.82",p2:"US$8.66",cl:["#2a2a2a","#5a6a4a"],tb:"",w:0},
-{s:"8387S26",n:"Micro-Grid Breathable Quick-Dry Contrast Sport Tee",cat:"T-shirts",comp:"88% Polyester, 12% Spandex",g:"125G",cr:["Grid breathable weave + Rubber Print","Micro-grid texture"],pf:["Polyester + spandex stretch fabric","Fine breathable micro-grid structure"],p1:"US$6.84",p2:"US$7.58",cl:["#8a1a2a","#d4b080","#3a3a3a","#f5f5f5","#5a6a4a"],tb:"",w:0},
-{s:"8405S26",n:"Punched Hole Sport Quick-Dry Tee",cat:"T-shirts",comp:"80% Nylon, 20% Spandex",g:"160G",cr:["Perforated print + mesh panels","Back perforation adds breathability"],pf:["Nylon + spandex high-stretch combo","Mesh panels — targeted cooling"],p1:"US$7.50",p2:"US$8.31",cl:["#f5f5f5","#1a1a1a"],tb:"",w:0},
-{s:"8411S26",n:"UPF50+ Pro Sun Protection Cool Feel Contrast Sport Tee",cat:"T-shirts",comp:"50% Polyester, 50% Sorona®",g:"160G",cr:["Flock glue print, premium touch","Contrast design strong sporty feel"],pf:["UPF50+ professional sun protection","Cool-on-contact — instant cooling"],p1:"US$5.86",p2:"US$6.48",cl:["#6a7aaa","#1a3a6a","#8a2a2a","#1a1a1a"],tb:"SORONA",w:0},
-{s:"8438S26",n:"Water-Reactive Print Sport Tee",cat:"T-shirts",comp:"100% Polyester",g:"150G",cr:["Water-reactive print","Pattern appears when wet"],pf:["Ultra-light breathable knit fabric","Soft hand feel / Ultra-low weight"],p1:"US$6.99",p2:"US$7.74",cl:["#a0a0a0","#c4a060"],tb:"",w:0},
-{s:"8515S26",n:"Contrast Stitch Brush Embroidery",cat:"T-shirts",comp:"61.6% Cotton, 38.4% Polyester",g:"220G",cr:["Rubber print + brush embroidery + white ink DTG","Brush embroidery dimensional touch"],pf:["Cotton-polyester blend","220G comfortable weight"],p1:"US$11.55",p2:"US$12.79",cl:["#e0e0e0","#1a1a1a"],tb:"",w:0},
-{s:"8545S26",n:"Lightweight Reflective Running Stretch Tee",cat:"T-shirts",comp:"100% Polyester",g:"110G",cr:["Rubber print + reflective paste dual craft","Ultra-lightweight running-specific fit"],pf:["High-stretch melange quick-dry fabric","Moisture-wicking fiber structure"],p1:"US$3.67",p2:"US$4.06",cl:["#7a8a3a","#1a1a1a"],tb:"",w:0},
-{s:"8576S26",n:"Lyocell Wool Sport Tee",cat:"T-shirts",comp:"76% Lenzing Tencel + 16% Wool + 8% Lycra",g:"180G",cr:["Fine flatlock seams, soft tencel-wool blend","Cinched waist, stretch fit for sport & daily"],pf:["76% Tencel + 16% Wool, soft & breathable","8% Lycra for stretch, premium activewear"],p1:"US$7.30",p2:"US$8.08",cl:["#f0f0e0","#e0c0e0","#c0d8f0","#d0d0c0","#1a1a1a"],tb:"TENCEL",w:0},
-{s:"12422S24",n:"Cordura® Convertible Multi-Function Pants",cat:"Pants",comp:"100% Nylon",g:"110G",cr:["Convertible zip design, multi-wear","Long pants / shorts free switch"],pf:["CORDURA® military-grade abrasion-resistant","100% nylon / Ultra durable"],p1:"US$21.86",p2:"US$24.20",cl:["#f0f0f0","#8a8a6a","#b8a840","#1a1a1a"],tb:"CORDURA",w:0},
-{s:"12720S25",n:"Cordura® Curved-Cut Pants",cat:"Pants",comp:"100% Nylon",g:"110G",cr:["Ink print + side zip pocket","3D deconstructed curved cut"],pf:["CORDURA® military-grade abrasion-resistant","100% nylon / Ultra tear-resistant"],p1:"US$27.78",p2:"US$30.76",cl:["#f0f0f0","#8a8a6a","#b8a840","#1a1a1a"],tb:"CORDURA",w:0},
-{s:"12730S25",n:"Cordura® Shorts",cat:"Shorts",comp:"100% Nylon",g:"110G",cr:["Ink print + side zip pocket","Curved cut shorts, high recognition"],pf:["CORDURA® military-grade abrasion-resistant","100% nylon / Lightweight tear-resistant"],p1:"US$19.17",p2:"US$21.22",cl:["#f0f0f0","#8a8a6a","#b8a840","#1a1a1a"],tb:"CORDURA",w:0},
-{s:"13680W26",n:"Cordura® + Lycra Outdoor Hiking Pants",cat:"Pants",comp:"100% Nylon",g:"136G",cr:["Drawstring + adjustable buckle, quick-dry","3D panel pieces with slight flare curve"],pf:["CORDURA® + Lycra stretch combo","Ultra-light 136G / Abrasion-resistant"],p1:"US$16.49",p2:"US$18.26",cl:["#8a8a6a","#5a5a5a","#1a1a1a"],tb:"CORDURA",w:0},
-{s:"13701W26",n:"Lycra Thermal Sport Jogger Pants",cat:"Pants",comp:"72.3% Polyester, 25% Lycra, 2.7% Spandex",g:"350G",cr:["Drawstring + button vent","Knee darts follow natural body contour"],pf:["Lycra fabric — comfortable 4-way stretch","Thermal function / Sport warmth"],p1:"US$16.28",p2:"US$18.03",cl:["#d4c4a0","#8a8a8a","#4a5a3a","#1a1a1a"],tb:"LYCRA",w:0},
-{s:"13702W26",n:"Cordura® + Lycra Climbing Pants",cat:"Pants",comp:"100% Nylon",g:"136G",cr:["Metal buckle + drawstring design","3D panel pieces, slight flare curve"],pf:["CORDURA® + Lycra stretch combo","Abrasion-resistant tear-resistant + stretch"],p1:"US$27.78",p2:"US$30.76",cl:["#8a8a6a","#5a5a5a","#1a1a1a"],tb:"CORDURA",w:0},
-{s:"13711W26",n:"Cordura Boulder Climbing Pants",cat:"Pants",comp:"100% Nylon",g:"136G",cr:["CORDURA® x LYCRA®, climbing-ready multi-mount","Spring-buckle quick cuff cinch + grid panel"],pf:["CORDURA®+Lycra, abrasion-resistant & stretch","Military-grade for bouldering & extreme outdoor"],p1:"US$25.97",p2:"US$28.75",cl:["#6a6a4a","#1a1a1a"],tb:"CORDURA",w:0},
-{s:"20260702-60",n:"Waist-Ruched Stretch Long-Sleeve",cat:"Women",comp:"85% Nylon 15% Spandex",g:"200G",cr:["Exquisite waist gathering, stretch slim fit","Versatile for yoga, sport, base & sun protection"],pf:["Ice-cool & 4-way stretch","Double-face matte weave, quick-dry breathable"],p1:"US$6.16",p2:"US$6.82",cl:["#f0f0f0","#c0c0c0","#e0a0c0","#a0a0a0","#1a1a1a"],tb:"",w:1},
-{s:"20260914-63",n:"Slub-Knit V-Neck Tee",cat:"Women",comp:"47.7% Cotton 48% Viscose 4.3% Spandex",g:"230G",cr:["Narrow shoulder & waist-cinched silhouette","Elastic slub-knit, V-neck stretch base layer"],pf:["3D slub-knit, cooling cotton-viscose blend","Snug breathable, moisture-wicking"],p1:"US$5.66",p2:"US$6.26",cl:["#f0f0f0","#c0c0c0","#b0a090","#8a8a8a","#1a1a1a"],tb:"",w:1},
-{s:"20260917-60",n:"Lyocell Slim-Fit Sleeveless Tee",cat:"Women",comp:"90% Lyocell 10% Spandex",g:"260G",cr:["Silky Tencel Lyocell, stretch & skin-friendly","Contoured slim fit for sport & daily"],pf:["90% Tencel Lyocell + 10% Spandex, silky","Breathable quick-dry, eco sustainable"],p1:"US$4.36",p2:"US$4.82",cl:["#e0e890","#c0e8f0","#a0a0a0","#1a1a1a"],tb:"TENCEL",w:1},
-{s:"20260917-63",n:"Sand-Washed Double-Face Women's Tee",cat:"Women",comp:"73% EcoVero Viscose 20% Polyester 7% Spandex",g:"220G",cr:["Fine flatlock seams, sand-washed double-face","Stretch fit for sport and casual wear"],pf:["Fine textured, soft stretch & skin-friendly","Anti-pilling, smooth for next-to-skin"],p1:"US$6.47",p2:"US$7.17",cl:["#f0f0f0","#c09080","#c0e0f0","#8a8a6a","#5a5a5a","#1a1a1a"],tb:"ECOVERO",w:1},
-{s:"20260918-62",n:"V-Neck Zip Slim-Fit Tee",cat:"Women",comp:"47.7% Cotton 48% Viscose 4.3% Spandex",g:"230G",cr:["Deep V+ invisible zip; pleated slim fit","Transparent-tape shoulder reinforcement"],pf:["Slub-knit texture, cooling cotton-viscose","Snug breathable, moisture-wicking"],p1:"US$4.89",p2:"US$5.42",cl:["#f0f0f0","#c8c890","#c0e0f0","#1a1a1a"],tb:"",w:1},
-{s:"20260924-60",n:"High-Stretch Slim Skort",cat:"Women",comp:"90% Lyocell 10% Spandex",g:"260G",cr:["Fine flatlock & bartack, silky Tencel Lyocell","2-in-1 skirt-legging for sport & daily"],pf:["Tencel rib-knit, drapey stretch & wicking","Anti-pilling & skin-friendly, next-to-skin"],p1:"US$6.98",p2:"US$7.73",cl:["#e0e890","#c0e0f0","#a0a0a0","#1a1a1a"],tb:"TENCEL",w:1},
-{s:"20260928-60",n:"Lyocell Sheer Long Sleeve",cat:"Women",comp:"65% Lyocell 35% Polyester",g:"170G",cr:["Fine flatlock seams, lightweight breathable","Stretch crew-neck base layer for sport & daily"],pf:["Flecked Tencel knit, cooling moisture-wicking","Wrinkle-resistant, 170G midweight"],p1:"US$6.16",p2:"US$6.82",cl:["#f0f0f0","#c0d8f0","#a0a0a0"],tb:"",w:1},
-{s:"20261007-63",n:"Contrast Stitch Slim V-Neck Tee",cat:"Women",comp:"70% Cotton 30% Polyester",g:"170G",cr:["Precision flatlock seams, contrast panels","Structured cotton-poly, slim retro sport fit"],pf:["Soft & abrasion-resistant","Breathable moisture-absorbent, shape-retaining"],p1:"US$6.58",p2:"US$7.29",cl:["#f0f0f0","#c0d0e0","#1a2a4a","#1a1a1a"],tb:"",w:1},
-{s:"20261008-60",n:"Mint Fragrance Halter-Neck Tank",cat:"Women",comp:"55% Cotton 31.25% Polyester Composite 13.75% Lyocell",g:"155G",cr:["Natural menthol & Sorona, antibacterial cooling","Rubber print logo, halter-neck stretch for sport"],pf:["Cooling mint fiber, 7A antibacterial, quick-dry","Eco Lyocell blend, soft & skin-friendly for summer"],p1:"US$5.09",p2:"US$5.63",cl:["#f0f0f0","#e0e0e0","#c0e0f0","#c8d040","#1a1a1a"],tb:"",w:1},
-{s:"DZCK261016-92",n:"Irregular Side-Strip Sweatpants",cat:"Pants",comp:"42% Cotton 53% Polyester 5% Other",g:"345G",cr:["Drawstring elastic waistband","Relaxed silhouette with functional pockets"],pf:["345G cotton-poly blend, brushed fleece warmth","Soft lightweight, low shrinkage & stable"],p1:"US$17.81",p2:"US$19.72",cl:["#d08030"],tb:"",w:0},
-{s:"DZWY261016-91",n:"Patchwork Zip Hoodie",cat:"Hoodie/Sweatshirt",comp:"42% Cotton 53% Polyester 5% Other",g:"345G",cr:["Layered 3D visual, adjustable drawstring hood","Drop-shoulder oversized relaxed fit, unisex"],pf:["345G cotton-poly blend, brushed fleece warmth","Low shrinkage, soft lightweight & stable"],p1:"US$23.94",p2:"US$26.50",cl:["#d08030"],tb:"",w:0}
-];
-const GRADS=["linear-gradient(135deg,#1a2a4a,#2a3a5a)","linear-gradient(135deg,#2a1a3a,#3a2a4a)","linear-gradient(135deg,#1a3a2a,#2a4a3a)","linear-gradient(135deg,#3a2a1a,#4a3a2a)","linear-gradient(135deg,#2a2a3a,#3a3a4a)","linear-gradient(135deg,#1a2a2a,#2a3a3a)"];
-function renderCards(list){
-  const grid=document.getElementById('product-grid'),noRes=document.getElementById('no-results');
-  if(!list.length){grid.innerHTML='';noRes.classList.add('show');return}
-  noRes.classList.remove('show');
-  grid.innerHTML=list.map((p,i)=>{
-    const grad=GRADS[i%GRADS.length];
-    const dots=p.cl.map(c=>`<div class="color-dot" style="background:${c}"></div>`).join('');
-    const tb=p.tb?`<div class="tech-badge">${p.tb}</div>`:'';
-    const wb=p.w?`<div class="gender-badge">Women's</div>`:'';
-    const comp=p.comp.length>40?p.comp.substring(0,38)+'…':p.comp;
-    return `<div class="card" data-style="${p.s}" data-category="${p.cat}">
-      <div class="card-img" style="background:${grad}">${tb}${wb}
-        <div class="price-tag"><div class="p1">${p.p1}</div><div class="p2">/1000pcs</div></div>
-      </div>
-      <div class="card-body">
-        <div class="style-no">${p.s}</div>
-        <div class="card-name">${p.n}</div>
-        <div class="badges"><span class="badge fabric">${comp}</span><span class="badge weight">${p.g}</span></div>
-        <div class="features"><div class="feat-row">
-          <div class="feat-col"><div class="feat-label">Craft & Highlights</div>${p.cr.map(c=>`<div class="feat-item">• ${c}</div>`).join('')}</div>
-          <div class="feat-col"><div class="feat-label">Fabric Performance</div>${p.pf.map(c=>`<div class="feat-item">• ${c}</div>`).join('')}</div>
-        </div></div>
-        <div class="card-bottom"><div class="color-dots">${dots}</div>
-          <div class="price-info"><div class="moq">≥300pcs</div><div class="price">${p.p2}</div></div>
-        </div>
-      </div>
-    </div>`;
-  }).join('');
-}
-function updateCounts(){
-  const cats={};P.forEach(p=>{cats[p.cat]=(cats[p.cat]||0)+1});
-  document.getElementById('cnt-all').textContent=P.length;
-  document.getElementById('cnt-tshirts').textContent=cats['T-shirts']||0;
-  document.getElementById('cnt-hoodies').textContent=cats['Hoodie/Sweatshirt']||0;
-  document.getElementById('cnt-jackets').textContent=cats['Jackets']||0;
-  document.getElementById('cnt-pants').textContent=cats['Pants']||0;
-  document.getElementById('cnt-shorts').textContent=cats['Shorts']||0;
-  document.getElementById('cnt-ls').textContent=cats['Long Sleeve']||0;
-  document.getElementById('cnt-women').textContent=cats['Women']||0;
-  document.getElementById('total-count').textContent=P.length;
-}
-let curCat='all',searchTerm='';
-function filter(){
-  let f=P;
-  if(curCat!=='all')f=f.filter(p=>p.cat===curCat);
-  if(searchTerm){const q=searchTerm.toLowerCase();f=f.filter(p=>p.s.toLowerCase().includes(q)||p.n.toLowerCase().includes(q)||p.comp.toLowerCase().includes(q)||p.cr.join(' ').toLowerCase().includes(q)||p.pf.join(' ').toLowerCase().includes(q)||(p.tb||'').toLowerCase().includes(q))}
-  renderCards(f);
-}
-document.querySelectorAll('.nav-btn').forEach(b=>{b.addEventListener('click',()=>{document.querySelectorAll('.nav-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');curCat=b.dataset.cat;filter()})});
-document.getElementById('search').addEventListener('input',e=>{searchTerm=e.target.value.trim();filter()});
-updateCounts();renderCards(P);
-</script>
 </body>
 </html>
